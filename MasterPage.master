@@ -1,0 +1,88 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="Content/bootstrap.css" rel="stylesheet" />
+    <link href="Content/mystyle.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet" />
+    <link href="Content/fancybox/jquery.fancybox.css" rel="stylesheet" />
+</head>
+<body>
+    <form id="form1" runat="server">
+
+        <div class="container borderSidesOnly">
+            <div class="soeg">
+                <asp:TextBox ID="TextBox_Soeg" runat="server"></asp:TextBox>
+                <asp:Button ID="Button_Soeg" runat="server" Text="Søg" OnClick="Button_Soeg_Click" />
+                <br />
+                <a class="black-link" href="Soeg.aspx">Avanceret søg</a>
+            </div>
+
+            <header>
+            </header>
+            <!-- nav start -->
+            <nav class="navbar navbar-static-top border">
+
+
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </div>
+
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav borderTopAndBottom">
+
+                        <li class="text-center borderRight"><a href="Default.aspx">FORSIDE</a></li>
+                        <li class="text-center borderRight"><a href="Braendeovne.aspx">BRÆNDEOVNE</a></li>
+                        <li class="text-center borderRight"><a href="Tilbehor.aspx">TILBEHØR</a></li>
+                        <li class="text-center borderRight"><a href="KontaktSide.aspx">KONTAKT</a></li>
+                        <li class="text-center"><a href="NyhedsSide.aspx">NYHEDER</a></li>
+
+
+
+                    </ul>
+                </div>
+
+            </nav>
+
+            <!-- nav slut -->
+
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+
+            <div class="row">
+                <div class="col-md-12">
+                    <footer class="borderTop">
+                        <asp:Repeater ID="Repeater_FooterInfo" runat="server" ItemType="Kontakt">
+                            <ItemTemplate>
+                                <p class="text-center">
+                                    <strong><%# Item.Navn + " - " + Item.Adresse + " - " + Item.PostnrOgBy + " - +45 " + Item.Tlf + " - " + Item.Mail %></strong>
+                                </p>
+                            </ItemTemplate>
+                        </asp:Repeater>
+                    </footer>
+                </div>
+            </div>
+
+
+        </div>
+
+        <script src="Scripts/jquery-1.9.1.js"></script>
+        <script src="Scripts/bootstrap.js"></script>
+        <script src="Scripts/jquery.fancybox.pack.js"></script>
+        <script src="Scripts/jquery.fancybox-media.js"></script>
+        <script src="Scripts/MyScripts.js"></script>
+        <script src="Scripts/RandomHeaderimg.js"></script>
+    </form>
+</body>
+</html>

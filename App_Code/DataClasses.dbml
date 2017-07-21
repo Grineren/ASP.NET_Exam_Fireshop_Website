@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="FireShop" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=(LocalDB)\MSSQLLocalDB;Initial Catalog=FireShop;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="FireShopConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Admin" Member="Admins">
+    <Type Name="Admin">
+      <Column Name="A_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Brugernavn" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Kodeord" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Vare" Member="Vares">
+    <Type Name="Vare">
+      <Column Name="V_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Navn" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Pris" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Beskrivelse" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Fk_BilledeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_KategoriId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_MaerkeId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Vare_Tilbud" Member="Tilbuds" ThisKey="V_Id" OtherKey="Fk_VareId" Type="Tilbud" />
+      <Association Name="Billeder_Vare" Member="Billeder" ThisKey="Fk_BilledeId" OtherKey="B_Id" Type="Billeder" IsForeignKey="true" />
+      <Association Name="Kategorier_Vare" Member="Kategorier" ThisKey="Fk_KategoriId" OtherKey="K_Id" Type="Kategorier" IsForeignKey="true" />
+      <Association Name="Maerke_Vare" Member="Maerke" ThisKey="Fk_MaerkeId" OtherKey="M_Id" Type="Maerke" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Billeder" Member="Billeders">
+    <Type Name="Billeder">
+      <Column Name="B_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Sti" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Billeder_Vare" Member="Vares" ThisKey="B_Id" OtherKey="Fk_BilledeId" Type="Vare" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Forside" Member="Forsides">
+    <Type Name="Forside">
+      <Column Name="F_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Tekst" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+      <Column Name="Billede" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Overskrift" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kategorier" Member="Kategoriers">
+    <Type Name="Kategorier">
+      <Column Name="K_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Kategori" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Association Name="Kategorier_Vare" Member="Vares" ThisKey="K_Id" OtherKey="Fk_KategoriId" Type="Vare" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Kontakt" Member="Kontakts">
+    <Type Name="Kontakt">
+      <Column Name="K_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Navn" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Adresse" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="PostnrOgBy" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Tlf" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Mail" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Maerke" Member="Maerkes">
+    <Type Name="Maerke">
+      <Column Name="M_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Brand" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_KategoriId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Billede" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="Beskrivelse" Type="System.String" DbType="Text" CanBeNull="true" UpdateCheck="Never" />
+      <Association Name="Maerke_Vare" Member="Vares" ThisKey="M_Id" OtherKey="Fk_MaerkeId" Type="Vare" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Nyheder" Member="Nyheders">
+    <Type Name="Nyheder">
+      <Column Name="N_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Overskrift" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Dato" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="Tekst" Type="System.String" DbType="Text NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Tilbud" Member="Tilbuds">
+    <Type Name="Tilbud">
+      <Column Name="T_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="TildbudPct" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Fk_VareId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SlutDato" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="StartDato" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Association Name="Vare_Tilbud" Member="Vare" ThisKey="Fk_VareId" OtherKey="V_Id" Type="Vare" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>
